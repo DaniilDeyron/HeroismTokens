@@ -1,0 +1,25 @@
+{
+  "id": "heroism-tokens",
+  "title": "Heroism Tokens",
+  "description": "Персональные жетоны героизма и Апофеоз для игроков D&D 5e.",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": 13,
+    "verified": 13,
+    "maximum": 13
+  },
+  "authors": [
+    {
+      "name": "DaniilDeyron"
+    }
+  ],
+  "esmodules": [
+    "scripts/main.js"
+  ],
+  "styles": [
+    "styles/heroism.css"
+  ],
+  "socket": false,
+  "manifest": "https://raw.githubusercontent.com/DaniilDeyron/HeroismTokens/main/module.json",
+  "download": "https://github.com/DaniilDeyron/HeroismTokens/archive/refs/heads/main.zip"
+}
