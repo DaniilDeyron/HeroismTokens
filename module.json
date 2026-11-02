@@ -1,8 +1,8 @@
 {
   "id": "heroism-tokens",
   "title": "Heroism Tokens",
-  "description": "Персональные жетоны героизма и Апофеоз для игроков D&D 5e.",
-  "version": "1.0.0",
+  "description": "Персональные жетоны героизма и Апофеоз для игроков D&D 5e. Foundry VTT 13.",
+  "version": "1.0.1",
   "compatibility": {
     "minimum": 13,
     "verified": 13,
