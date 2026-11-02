@@ -23,6 +23,7 @@ export class HeroismWindow extends HandlebarsApplicationMixin(ApplicationV2) {
     const state = await HeroismStore.getFor();
     return {
       tokens: state.tokens.map((active, index) => ({ index, active, number: index + 1 })),
+      tokenCount: state.tokens.filter(Boolean).length,
       apotheosis: state.apotheosis,
       userName: game.user.name
     };
