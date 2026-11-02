@@ -420,3 +420,186 @@
     width: 90%;
   }
 }
+
+/* GM participant profile switcher */
+.heroism-gm-header {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--heroism-line);
+  text-align: center;
+}
+.heroism-gm-header h2 {
+  margin: 2px 0 5px;
+  color: #4a2d16;
+  border: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.55rem;
+}
+.heroism-gm-intro {
+  max-width: 560px;
+  margin: 0 auto;
+  color: var(--heroism-muted);
+  font-size: .88rem;
+  line-height: 1.4;
+}
+.heroism-player-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 3px 0 10px;
+  border-bottom: 1px solid var(--heroism-line);
+}
+.heroism-player-tab {
+  display: flex;
+  flex: 1 1 145px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+  padding: 9px 11px;
+  border: 1px solid rgba(126, 88, 43, .28);
+  border-radius: 8px;
+  color: #6f5639;
+  background: rgba(255, 248, 229, .45);
+  box-shadow: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background .16s ease, border-color .16s ease, transform .16s ease;
+}
+.heroism-player-tab:hover {
+  border-color: #b98535;
+  background: rgba(255, 248, 229, .8);
+}
+.heroism-player-tab.is-selected {
+  border-color: #9b6b2e;
+  color: #fff4d8;
+  background: linear-gradient(180deg, #9b6b2e, #70451d);
+  box-shadow: inset 0 1px rgba(255,255,255,.2), 0 2px 4px rgba(74,45,22,.16);
+}
+.heroism-player-tab-name {
+  overflow: hidden;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.heroism-player-tab-count {
+  flex: 0 0 auto;
+  font-family: var(--font-primary, sans-serif);
+  font-size: .76rem;
+  opacity: .8;
+}
+.heroism-player-profile {
+  padding: 16px;
+  border: 1px solid rgba(126, 88, 43, .28);
+  border-radius: 12px;
+  background: rgba(255, 248, 229, .42);
+  box-shadow: inset 0 1px rgba(255,255,255,.45);
+}
+.heroism-profile-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--heroism-line);
+}
+.heroism-profile-kicker {
+  color: #927b5e;
+  font-family: var(--font-primary, sans-serif);
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.heroism-profile-heading h3 {
+  margin: 3px 0 0;
+  color: #4a2d16;
+  border: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+}
+.heroism-profile-reserve {
+  padding: 14px 8px 10px;
+  text-align: center;
+}
+.heroism-profile-reserve-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--heroism-muted);
+  font-family: var(--font-primary, sans-serif);
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.heroism-profile-reserve-heading strong {
+  color: #6c431d;
+  font-size: .95rem;
+}
+.heroism-profile-reserve-heading small {
+  color: #927a5c;
+  font-size: .75rem;
+}
+.heroism-gm-token-row {
+  display: flex;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 18px);
+  padding: 12px 0 7px;
+}
+.heroism-gm-token {
+  display: block;
+  flex: 0 1 76px;
+  width: 76px;
+  height: 76px;
+}
+.heroism-gm-token img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.heroism-gm-token.is-active {
+  filter: drop-shadow(0 3px 5px rgba(89, 52, 15, .32)) drop-shadow(0 0 4px rgba(226, 174, 79, .4));
+  opacity: 1;
+}
+.heroism-gm-token.is-inactive {
+  filter: grayscale(1) brightness(.68);
+  opacity: .38;
+}
+.heroism-profile-hint {
+  margin: 0;
+  color: #927b5e;
+  font-family: var(--font-primary, sans-serif);
+  font-size: .72rem;
+}
+.heroism-gm-apotheosis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--heroism-line);
+  color: #765a40;
+}
+.heroism-gm-apotheosis .ready { color: #24743b; }
+.heroism-gm-apotheosis .spent { color: #8b2730; }
+.heroism-gm-empty {
+  padding: 30px 12px;
+  color: #765a40;
+  text-align: center;
+}
+.heroism-gm-empty p {
+  margin: 6px 0 0;
+  color: var(--heroism-muted);
+}
+@media (max-width: 520px) {
+  .heroism-player-tab { flex-basis: 100%; }
+  .heroism-player-profile { padding: 11px; }
+  .heroism-gm-token-row { gap: 4px; }
+  .heroism-gm-token {
+    flex-basis: 17%;
+    width: 17%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+}
