@@ -7,7 +7,7 @@ export class HeroismWindow extends HandlebarsApplicationMixin(ApplicationV2) {
     id: "heroism-tokens-player",
     tag: "section",
     window: { title: "Жетоны героизма", icon: "fas fa-coins", resizable: true },
-    position: { width: 620, height: "auto" },
+    position: { width: 700, height: "auto" },
     classes: ["heroism-window"],
     actions: {
       toggleToken: HeroismWindow.toggleToken,
