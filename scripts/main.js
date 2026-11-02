@@ -6,12 +6,21 @@ const MODULE_ID = "heroism-tokens";
 let playerWindow = null;
 let gmWindow = null;
 
+function openPlayerWindow() {
+  if (!playerWindow) playerWindow = new HeroismWindow();
+  playerWindow.render({ force: true });
+}
+
+function openGMWindow() {
+  if (!gmWindow) gmWindow = new HeroismGMView();
+  gmWindow.render({ force: true });
+}
+
 Hooks.once("init", () => {
   console.log(`[${MODULE_ID}] Initializing Heroism Tokens for Foundry VTT 13`);
 });
 
 Hooks.once("ready", () => {
-  // Warm up local store and subscribe to cross-client updates.
   HeroismStore.init();
   game.socket.on(`module.${MODULE_ID}`, (payload) => {
     if (!payload || payload.type !== "user-state") return;
@@ -20,30 +29,23 @@ Hooks.once("ready", () => {
 });
 
 Hooks.on("getSceneControlButtons", (controls) => {
-  const control = {
-    name: "heroism-tokens",
-    title: "Жетоны героизма",
-    icon: "fas fa-coins",
-    layer: "TokenLayer",
-    visible: true,
-    tools: [{
-      name: "open-heroism",
-      title: "Открыть жетоны героизма",
-      icon: `fa-solid fa-coins`,
-      button: true,
-      onClick: () => {
-        if (!playerWindow || !playerWindow.rendered) playerWindow = new HeroismWindow();
-        playerWindow.render({ force: true });
-      }
-    }]
-  };
-
-  // V13 uses an object keyed by control name.
-  if (Array.isArray(controls)) {
-    controls.push(control);
-  } else {
-    controls[control.name] = control;
+  // Add the launcher as a single tool inside Foundry's existing Token controls.
+  // This avoids creating a separate control group for a module with one button.
+  const tokenControl = controls.tokens;
+  if (!tokenControl?.tools) {
+    console.warn(`[${MODULE_ID}] Could not find the Token scene control group.`);
+    return;
   }
+
+  tokenControl.tools.heroismTokens = {
+    name: "heroismTokens",
+    title: "Открыть жетоны героизма",
+    icon: "fa-solid fa-coins",
+    button: true,
+    visible: true,
+    order: Object.keys(tokenControl.tools).length,
+    onChange: () => openPlayerWindow()
+  };
 });
 
 Hooks.on("getHeaderControlsApplicationV2", (app, controls) => {
@@ -51,10 +53,7 @@ Hooks.on("getHeaderControlsApplicationV2", (app, controls) => {
   controls.push({
     icon: "fas fa-users",
     label: "Жетоны игроков",
-    onClick: () => {
-      if (!gmWindow || !gmWindow.rendered) gmWindow = new HeroismGMView();
-      gmWindow.render({ force: true });
-    }
+    onClick: () => openGMWindow()
   });
 });
 
@@ -62,10 +61,6 @@ Hooks.on("userConnected", () => {
   if (game.user.isGM && gmWindow?.rendered) gmWindow.render({ force: true });
 });
 
-Hooks.on("updateUser", (user) => {
+Hooks.on("updateUser", () => {
   if (game.user.isGM && gmWindow?.rendered) gmWindow.render({ force: true });
-});
-
-Hooks.on("canvasReady", () => {
-  // No scene-specific state; tool remains persistent across scene changes.
 });
