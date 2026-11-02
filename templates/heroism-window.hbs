@@ -1,0 +1,40 @@
+<div class="heroism-content">
+  <header class="heroism-heading">
+    <h2>Жетоны героизма</h2>
+    <p>{{userName}}</p>
+  </header>
+
+  <div class="heroism-token-row" role="group" aria-label="Пять жетонов героизма">
+    {{#each tokens as |token|}}
+      <button type="button"
+              class="heroism-token {{#if token.active}}is-active{{else}}is-inactive{{/if}}"
+              data-action="toggleToken"
+              data-index="{{token.index}}"
+              aria-pressed="{{token.active}}"
+              aria-label="Жетон {{token.number}}: {{#if token.active}}имеется{{else}}отсутствует{{/if}}">
+        <img src="modules/heroism-tokens/assets/heroism-coin.webp" alt="">
+      </button>
+    {{/each}}
+  </div>
+
+  <p class="heroism-summary">
+    Решите сцену красиво в соответствии со своим персонажем! Вы можете потратить от 1 до 5 жетонов, чтобы повлиять на сцену. Чем больше жетонов, тем больше сила их воздействия на сцену и на вас.
+    <br>Опишите мастеру при использовании.
+  </p>
+
+  <section class="heroism-apotheosis">
+    <button type="button"
+            class="heroism-apotheosis-button {{#if apotheosis}}is-ready{{else}}is-spent{{/if}}"
+            data-action="toggleApotheosis"
+            aria-pressed="{{apotheosis}}">
+      Апофеоз!
+    </button>
+    <p>
+      Апофеоз — один раз за всю компанию вы можете решить проблему, в какую попадёте. Опишите то, какие силы помогают вам выбраться из ситуации, в которую вы попали, или разрешите мастеру описать это за вас.
+    </p>
+  </section>
+
+  <p class="heroism-footer">
+    При вашем желании вы можете получить Вдохновение, когда вы получаете жетон героизма.
+  </p>
+</div>
