@@ -1,40 +1,53 @@
 <div class="heroism-content">
   <header class="heroism-heading">
+    <span class="heroism-eyebrow">Путь героя</span>
     <h2>Жетоны героизма</h2>
     <p>{{userName}}</p>
   </header>
 
-  <div class="heroism-token-row" role="group" aria-label="Пять жетонов героизма">
-    {{#each tokens as |token|}}
-      <button type="button"
-              class="heroism-token {{#if token.active}}is-active{{else}}is-inactive{{/if}}"
-              data-action="toggleToken"
-              data-index="{{token.index}}"
-              aria-pressed="{{token.active}}"
-              aria-label="Жетон {{token.number}}: {{#if token.active}}имеется{{else}}отсутствует{{/if}}">
-        <img src="modules/heroism-tokens/assets/heroism-coin.webp" alt="">
-      </button>
-    {{/each}}
-  </div>
+  <section class="heroism-reserve" aria-label="Запас жетонов героизма">
+    <div class="heroism-reserve-heading">
+      <span>Ваш запас</span>
+      <strong>{{tokenCount}} <small>/ 5</small></strong>
+    </div>
+    <div class="heroism-token-row" role="group" aria-label="Пять жетонов героизма">
+      {{#each tokens as |token|}}
+        <button type="button"
+                class="heroism-token {{#if token.active}}is-active{{else}}is-inactive{{/if}}"
+                data-action="toggleToken"
+                data-index="{{token.index}}"
+                aria-pressed="{{token.active}}"
+                aria-label="Жетон {{token.number}}: {{#if token.active}}доступен{{else}}не доступен{{/if}}">
+          <img src="modules/heroism-tokens/assets/heroism-coin.webp" alt="" draggable="false">
+        </button>
+      {{/each}}
+    </div>
+    <p class="heroism-token-hint">Нажмите на жетон, чтобы отметить его использование или получение</p>
+  </section>
 
   <p class="heroism-summary">
-    Решите сцену красиво в соответствии со своим персонажем! Вы можете потратить от 1 до 5 жетонов, чтобы повлиять на сцену. Чем больше жетонов, тем больше сила их воздействия на сцену и на вас.
-    <br>Опишите мастеру при использовании.
+    Меняйте ход истории! Потратьте от 1 до 5 жетонов, чтобы повлиять на сцену.
+    Чем больше жетонов вы вложите, тем сильнее будет эффект — и последствия.
+    <span>Опишите мастеру, как именно ваш герой использует эту возможность.</span>
   </p>
 
   <section class="heroism-apotheosis">
+    <div class="heroism-section-label">Последний шанс изменить судьбу</div>
     <button type="button"
             class="heroism-apotheosis-button {{#if apotheosis}}is-ready{{else}}is-spent{{/if}}"
             data-action="toggleApotheosis"
             aria-pressed="{{apotheosis}}">
-      Апофеоз!
+      <span class="heroism-apotheosis-icon">✦</span>
+      Апофеоз
+      <span class="heroism-apotheosis-icon">✦</span>
     </button>
     <p>
-      Апофеоз — один раз за всю компанию вы можете решить проблему, в какую попадёте. Опишите то, какие силы помогают вам выбраться из ситуации, в которую вы попали, или разрешите мастеру описать это за вас.
+      Один раз за всю кампанию вы можете разрешить проблему, в которую попали.
+      Опишите, какие силы помогают вам выбраться, или доверьте это мастеру.
     </p>
   </section>
 
   <p class="heroism-footer">
-    При вашем желании вы можете получить Вдохновение, когда вы получаете жетон героизма.
+    По желанию получение жетона героизма также может сопровождаться Вдохновением.
   </p>
 </div>
