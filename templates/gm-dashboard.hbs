@@ -2,44 +2,49 @@
   <header class="heroism-gm-header">
     <span class="heroism-eyebrow">Управление кампанией</span>
     <h2>Профили участников</h2>
-    <p class="heroism-gm-intro">Выберите игрока, чтобы просмотреть его жетоны героизма и состояние Апофеоза.</p>
+    <p class="heroism-gm-intro">У каждого игрока своя карточка жетонов. Выберите участника, чтобы просмотреть его личный запас.</p>
   </header>
+
   {{#if players.length}}
-    <nav class="heroism-player-switcher" aria-label="Выбор участника">
-      {{#each players as |player|}}
-        <button type="button" class="heroism-player-tab {{#if player.isSelected}}is-selected{{/if}}"
-                data-action="selectPlayer" data-user-id="{{player.id}}" aria-pressed="{{player.isSelected}}">
-          <span class="heroism-player-tab-name">{{player.name}}</span>
-          <span class="heroism-player-tab-count">{{player.count}} / 5</span>
-        </button>
-      {{/each}}
-    </nav>
+    <div class="heroism-profile-picker">
+      <label for="heroism-profile-select">Просмотр профиля участника</label>
+      <select id="heroism-profile-select" class="heroism-profile-select" aria-label="Выбрать профиль игрока">
+        {{#each players as |player|}}
+          <option value="{{player.id}}" {{#if player.isSelected}}selected{{/if}}>
+            {{player.name}} — {{player.count}} / 5 жетонов
+          </option>
+        {{/each}}
+      </select>
+    </div>
+
     {{#if selectedPlayer}}
       <article class="heroism-player-profile" aria-label="Профиль участника {{selectedPlayer.name}}">
         <div class="heroism-profile-heading">
           <div>
-            <span class="heroism-profile-kicker">Карточка участника</span>
+            <span class="heroism-profile-kicker">Личная карточка игрока</span>
             <h3>{{selectedPlayer.name}}</h3>
           </div>
           <span class="heroism-presence {{#if selectedPlayer.active}}online{{else}}offline{{/if}}">
             {{#if selectedPlayer.active}}В сети{{else}}Не в сети{{/if}}
           </span>
         </div>
+
         <section class="heroism-profile-reserve">
           <div class="heroism-profile-reserve-heading">
             <span>Запас жетонов</span>
             <strong>{{selectedPlayer.count}} <small>/ 5</small></strong>
           </div>
           <div class="heroism-gm-token-row" aria-label="Состояние пяти жетонов">
-            {{#each selectedPlayer.tokens as |active|}}
+            {{#each selectedPlayer.tokens as |active index|}}
               <span class="heroism-gm-token {{#if active}}is-active{{else}}is-inactive{{/if}}"
-                    title="{{#if active}}Жетон доступен{{else}}Жетон не доступен{{/if}}">
+                    title="Жетон {{index}}: {{#if active}}доступен{{else}}не доступен{{/if}}">
                 <img src="modules/heroism-tokens/assets/heroism-coin.webp" alt="">
               </span>
             {{/each}}
           </div>
-          <p class="heroism-profile-hint">Золотые жетоны доступны участнику, приглушённые — потрачены или отсутствуют.</p>
+          <p class="heroism-profile-hint">Каждый жетон отображает личное состояние выбранного игрока.</p>
         </section>
+
         <div class="heroism-gm-apotheosis">
           <span>Апофеоз</span>
           {{#if selectedPlayer.apotheosis}}
@@ -53,7 +58,7 @@
   {{else}}
     <div class="heroism-gm-empty">
       <strong>Участники пока не найдены</strong>
-      <p>Когда игроки подключатся к миру, их профили появятся здесь.</p>
+      <p>В этом мире пока нет пользователей, кроме мастера.</p>
     </div>
   {{/if}}
 </div>
